@@ -20,18 +20,19 @@ window.addEventListener('load', () => {
     HideDataWhenThereIsNoLocation();
   }
 });
-function HideDataWhenThereIsNoLocation() {
+
+const HideDataWhenThereIsNoLocation = () => {
   title.classList.add('hidden');
   temp.classList.add('hidden');
   weatherDescription.classList.add('hidden');
-}
+};
 
-function ShowData() {
+const ShowData = () => {
   titleNoLocation.classList.add('hidden');
   title.classList.remove('hidden');
   temp.classList.remove('hidden');
   weatherDescription.classList.remove('hidden');
-}
+};
 
 // Search Part Selectors
 const searchBtn = document.querySelector('.search-btn');
@@ -57,7 +58,7 @@ searchInput.addEventListener('keypress', (e) => {
   }
 });
 
-async function getApi(apiUrl) {
+const getApi = async (apiUrl) => {
   await fetch(apiUrl)
     .then((response) => {
       if (!response.ok) {
@@ -69,7 +70,7 @@ async function getApi(apiUrl) {
     .then((data) => {
       putDataInDom(data);
     });
-}
+};
 
 const getBackground = () => {
   let city = document.querySelector('.search-input').value;
@@ -77,10 +78,18 @@ const getBackground = () => {
     "url('https://source.unsplash.com/1600x900/?" + city + "')";
 };
 
+const errorBackgrond = (status) => {
+  if (status === 404) {
+    document.body.style.backgroundImage =
+      "linear-gradient(to right,#00000030,#00000037),url('./img/wrong-city.jpg')";
+  }
+};
+
 const worngCity = (status, cityName = '') => {
+  errorBackgrond(status);
   const titleH1 = document.querySelector('.title h1');
-  if (status == 404) {
-    titleH1.textContent = 'Unkown City!';
+  if (status === 404) {
+    titleH1.textContent = 'City Not Found!';
     cityTitle.textContent = '';
     temp.classList.add('hidden');
     weatherDescription.classList.add('hidden');
