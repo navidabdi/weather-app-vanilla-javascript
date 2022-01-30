@@ -120,11 +120,14 @@ img.temp-icon {
 }
 @media only screen and (max-width: 768px) {
   .weather-app {
-    width: 90%;
+    width: 95%;
+    padding: 1.5rem;
   }
   body,
-  .title h2,
   p {
     font-size: 90%;
+  }
+  .title h2 {
+    font-size: 1.1rem;
   }
 }
