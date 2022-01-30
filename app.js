@@ -6,6 +6,7 @@ const temp = document.querySelector('.temp');
 const weatherDescription = document.querySelector('.weather-des');
 let long;
 let lat;
+
 window.addEventListener('load', () => {
   if (navigator.getlocation) {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -37,19 +38,30 @@ const searchBtn = document.querySelector('.search-btn');
 const searchInput = document.querySelector('.search-input');
 const body = document.querySelector('.body');
 
-// Search Part Functions
-searchBtn.addEventListener('click', () => {
+// Launch The Api To Get The Data And Show To User
+const launchApi = () => {
   let city = document.querySelector('.search-input').value;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`;
   getApi(apiUrl);
   ShowData();
   getBackground();
+};
+// Search Part Function
+searchBtn.addEventListener('click', () => {
+  launchApi();
+});
+// Enter Part Function
+searchInput.addEventListener('keypress', (e) => {
+  if (e.keyCode === 13) {
+    launchApi();
+  }
 });
 
 async function getApi(apiUrl) {
   await fetch(apiUrl)
     .then((response) => {
       if (!response.ok) {
+        worngCity(response.status);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       return response.json();
@@ -59,15 +71,26 @@ async function getApi(apiUrl) {
     });
 }
 
-function getBackground() {
+const getBackground = () => {
   let city = document.querySelector('.search-input').value;
   document.body.style.backgroundImage =
     "url('https://source.unsplash.com/1600x900/?" + city + "')";
-}
+};
 
-function getIcon() {
-  iconLink = '';
-}
+const worngCity = (status, cityName = '') => {
+  const titleH1 = document.querySelector('.title h1');
+  if (status == 404) {
+    titleH1.textContent = 'Unkown City!';
+    cityTitle.textContent = '';
+    temp.classList.add('hidden');
+    weatherDescription.classList.add('hidden');
+  } else {
+    temp.classList.remove('hidden');
+    weatherDescription.classList.remove('hidden');
+    titleH1.innerHTML = `Weather in <span class="city-title">${cityName}</span>`;
+    // cityTitle.textContent = cityName;
+  }
+};
 
 const tempValue = document.querySelector('.celsius-value');
 const cityTitle = document.querySelector('.city-title');
@@ -80,11 +103,11 @@ const pressure = document.querySelector('.pressure');
 const timezone = document.querySelector('.timezone');
 const fahrenheitValue = document.querySelector('.fahrenheit-value');
 
-function putDataInDom(data) {
+const putDataInDom = (data) => {
   tempIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-
   // City Title
-  cityTitle.textContent = data.name;
+  worngCity(200, data.name);
+  // cityTitle.textContent = data.name;
 
   // Temp Celsius Calculate
   tempValue.textContent = Math.floor(data.main.temp - 273.15);
@@ -106,4 +129,4 @@ function putDataInDom(data) {
   windDeg.textContent = data.wind.deg;
   pressure.textContent = data.main.pressure;
   timezone.textContent = data.timezone / 3600;
-}
+};

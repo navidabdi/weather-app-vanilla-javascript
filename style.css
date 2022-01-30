@@ -4,8 +4,8 @@
   box-sizing: border-box;
 }
 .body {
-  font-family: "Poppins", sans-serif;
-  background: url("https://source.unsplash.com/1600x900/?landscape") center
+  font-family: 'Poppins', sans-serif;
+  background: url('https://source.unsplash.com/1600x900/?landscape') center
     center;
   background-position: center center;
   background-size: cover;
@@ -68,6 +68,10 @@
   color: white;
   transform: rotateZ(0);
 }
+.title {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
 .temp {
   display: flex;
   align-items: center;
@@ -98,4 +102,20 @@ img.temp-icon {
 }
 .hidden {
   display: none;
+}
+
+@media only screen and (max-width: 1200px) {
+  .weather-app {
+    width: 60%;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .weather-app {
+    width: 70%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .weather-app {
+    width: 90%;
+  }
 }
