@@ -1,4 +1,4 @@
-// const api = WeatherApi();
+const api = 'b9a48dc3bbc34a4cd28fa1fa4279e387';
 
 const title = document.querySelector('.title');
 const titleNoLocation = document.querySelector('.title-no-location');
