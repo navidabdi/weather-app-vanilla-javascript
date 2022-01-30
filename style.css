@@ -122,4 +122,9 @@ img.temp-icon {
   .weather-app {
     width: 90%;
   }
+  body,
+  .title h2,
+  p {
+    font-size: 90%;
+  }
 }
