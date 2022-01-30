@@ -87,7 +87,7 @@ const errorBackgrond = (status) => {
 
 const worngCity = (status, cityName = '') => {
   errorBackgrond(status);
-  const titleH1 = document.querySelector('.title h1');
+  const titleH1 = document.querySelector('.title h2');
   if (status === 404) {
     titleH1.textContent = 'City Not Found!';
     cityTitle.textContent = '';

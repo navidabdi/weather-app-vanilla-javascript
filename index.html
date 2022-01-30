@@ -21,6 +21,12 @@
   </head>
   <body class="body">
     <section class="weather-app">
+      <div class="title-no-location">
+        <h2>Weather App / Inter Your City...</h2>
+      </div>
+      <div class="title">
+        <h2>Weather in <span class="city-title"></span></h2>
+      </div>
       <div class="search-bar">
         <input type="text" class="search-input" />
         <button class="search-btn">
@@ -42,12 +48,7 @@
           </svg>
         </button>
       </div>
-      <div class="title-no-location">
-        <h1>Type The Name Of Your City...</h1>
-      </div>
-      <div class="title">
-        <h1>Weather in <span class="city-title"></span></h1>
-      </div>
+
       <div class="temp">
         <div class="celsius-sec">
           <p class="celsius-value"></p>
@@ -68,7 +69,12 @@
         <p>Timezone: <span class="timezone"></span> H</p>
       </div>
     </section>
-
+    <div class="copyright">
+      Develop By Navid Abdi
+      <a href="https://github.com/navidabdi/weather-app-vanilla-javascript"
+        >Github</a
+      >
+    </div>
     <script src="api.js"></script>
     <script src="app.js"></script>
   </body>
